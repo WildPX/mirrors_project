@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://kby5qukqcosh"]
+[gd_scene load_steps=14 format=3 uid="uid://kby5qukqcosh"]
 
 [ext_resource type="FontFile" uid="uid://cx06axs6o6udb" path="res://Fonts/Inter-VariableFont_slnt,wght.ttf" id="1_7w5k4"]
 [ext_resource type="Texture2D" uid="uid://c2unmt83rg5ib" path="res://Art/spikes2.png" id="1_dy3lx"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://bj1kuf5wjh2vx" path="res://Art/mirror3.png" id="5_7f4ig"]
 [ext_resource type="Texture2D" uid="uid://b2hnepof4k12b" path="res://Art/target1.png" id="7_rsexx"]
 [ext_resource type="Script" path="res://Scripts/FileMessage.gd" id="9_2mevg"]
+[ext_resource type="AudioStream" uid="uid://c4ub5l3nvuk12" path="res://SFX/tick_002.ogg" id="10_p64u1"]
+[ext_resource type="Script" path="res://Scripts/Hover.gd" id="11_4i0g4"]
+[ext_resource type="AudioStream" uid="uid://cawewqu8apo48" path="res://SFX/toggle_001.ogg" id="12_eibyp"]
 
 [sub_resource type="Theme" id="Theme_5oflf"]
 default_font = ExtResource("1_7w5k4")
@@ -82,27 +85,29 @@ layout_mode = 2
 text = "Export"
 
 [node name="Label" type="Label" parent="SpawnObjects/VBoxContainer"]
+custom_minimum_size = Vector2(96, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 11
 text = "WASD: Move
 LMB: Laser
 RMB: Interact
 Alt + Wheel: Rotate
 Shift + Wheel: Resize
 Ctrl + Shift + D: Delete All"
+horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="SaveFile" type="FileDialog" parent="."]
 title = "Save Configuration"
-position = Vector2i(50, 50)
-size = Vector2i(392, 300)
+position = Vector2i(20, 50)
+size = Vector2i(500, 300)
 filters = PackedStringArray("*.txt ; Configuration")
 
 [node name="OpenFile" type="FileDialog" parent="."]
 title = "Open a File"
-position = Vector2i(50, 50)
-size = Vector2i(392, 300)
+position = Vector2i(20, 50)
+size = Vector2i(500, 300)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
@@ -123,14 +128,37 @@ vertical_alignment = 1
 autowrap_mode = 3
 script = ExtResource("9_2mevg")
 
+[node name="Hover" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_p64u1")
+volume_db = -2.0
+script = ExtResource("11_4i0g4")
+
+[node name="Click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_eibyp")
+volume_db = -2.0
+
 [connection signal="button_down" from="SpawnObjects/VBoxContainer/MirrorHor" to="." method="_on_mirror_hor_button_down"]
+[connection signal="mouse_entered" from="SpawnObjects/VBoxContainer/MirrorHor" to="Hover" method="_on_hover"]
+[connection signal="mouse_exited" from="SpawnObjects/VBoxContainer/MirrorHor" to="." method="_enable_shooting_on_mouse_exit"]
 [connection signal="button_down" from="SpawnObjects/VBoxContainer/MirrorLB" to="." method="_on_mirror_lb_button_down"]
+[connection signal="mouse_entered" from="SpawnObjects/VBoxContainer/MirrorLB" to="Hover" method="_on_hover"]
+[connection signal="mouse_exited" from="SpawnObjects/VBoxContainer/MirrorLB" to="." method="_enable_shooting_on_mouse_exit"]
 [connection signal="button_down" from="SpawnObjects/VBoxContainer/Mirror1" to="." method="_on_mirror_1_button_down"]
+[connection signal="mouse_entered" from="SpawnObjects/VBoxContainer/Mirror1" to="Hover" method="_on_hover"]
+[connection signal="mouse_exited" from="SpawnObjects/VBoxContainer/Mirror1" to="." method="_enable_shooting_on_mouse_exit"]
 [connection signal="button_down" from="SpawnObjects/VBoxContainer/Mirror2" to="." method="_on_mirror_2_button_down"]
+[connection signal="mouse_entered" from="SpawnObjects/VBoxContainer/Mirror2" to="Hover" method="_on_hover"]
+[connection signal="mouse_exited" from="SpawnObjects/VBoxContainer/Mirror2" to="." method="_enable_shooting_on_mouse_exit"]
 [connection signal="button_down" from="SpawnObjects/VBoxContainer/Mirror3" to="." method="_on_mirror_3_button_down"]
+[connection signal="mouse_entered" from="SpawnObjects/VBoxContainer/Mirror3" to="Hover" method="_on_hover"]
+[connection signal="mouse_exited" from="SpawnObjects/VBoxContainer/Mirror3" to="." method="_enable_shooting_on_mouse_exit"]
 [connection signal="button_down" from="SpawnObjects/VBoxContainer/Target" to="." method="_on_target_button_down"]
+[connection signal="mouse_entered" from="SpawnObjects/VBoxContainer/Target" to="Hover" method="_on_hover"]
+[connection signal="mouse_exited" from="SpawnObjects/VBoxContainer/Target" to="." method="_enable_shooting_on_mouse_exit"]
 [connection signal="button_down" from="SpawnObjects/VBoxContainer/Import" to="." method="_on_import_button_down"]
+[connection signal="mouse_entered" from="SpawnObjects/VBoxContainer/Import" to="Hover" method="_on_hover"]
 [connection signal="button_down" from="SpawnObjects/VBoxContainer/Export" to="." method="_on_export_button_down"]
+[connection signal="mouse_entered" from="SpawnObjects/VBoxContainer/Export" to="Hover" method="_on_hover"]
 [connection signal="canceled" from="SaveFile" to="." method="_on_save_file_canceled"]
 [connection signal="confirmed" from="SaveFile" to="." method="_on_save_file_confirmed"]
 [connection signal="file_selected" from="SaveFile" to="." method="_on_save_file_file_selected"]

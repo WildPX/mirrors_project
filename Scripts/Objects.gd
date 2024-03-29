@@ -6,6 +6,7 @@ extends Control
 @onready var open_file := $OpenFile
 @onready var save_file := $SaveFile
 @onready var message := $FileMessage
+@onready var click := $Click
 
 var objects: Array[PackedScene]
 
@@ -82,35 +83,43 @@ func _load_configuration(data):
 
 
 func _on_mirror_hor_button_down():
+	click.play()
 	_instantiate_object(0)
 
 
 func _on_mirror_lb_button_down():
+	click.play()
 	_instantiate_object(1)
 
 
 func _on_mirror_1_button_down():
+	click.play()
 	_instantiate_object(2)
 
 
 func _on_mirror_2_button_down():
+	click.play()
 	_instantiate_object(3)
 
 
 func _on_mirror_3_button_down():
+	click.play()
 	_instantiate_object(4)
 
 
 func _on_target_button_down():
+	click.play()
 	_instantiate_object(5)
 
 
 func _on_import_button_down():
+	click.play()
 	Global.can_shoot_laser = false
 	open_file.popup()
 
 
 func _on_export_button_down():
+	click.play()
 	Global.can_shoot_laser = false
 	save_file.popup()
 
@@ -127,10 +136,12 @@ func _on_open_file_file_selected(path):
 
 
 func _on_open_file_canceled():
+	click.play()
 	Global.can_shoot_laser = true
 
 
 func _on_open_file_confirmed():
+	click.play()
 	Global.can_shoot_laser = true
 
 
@@ -148,9 +159,14 @@ func _on_save_file_file_selected(path):
 
 
 func _on_save_file_canceled():
+	click.play()
 	Global.can_shoot_laser = true
 
 
 func _on_save_file_confirmed():
+	click.play()
 	Global.can_shoot_laser = true
 
+
+func _enable_shooting_on_mouse_exit():
+	Global.can_shoot_laser = true

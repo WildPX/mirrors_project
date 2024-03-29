@@ -97,3 +97,4 @@ delete_all_interactables={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.568627, 0.545098, 0.54902, 1)
