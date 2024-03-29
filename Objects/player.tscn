@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://q1c812brvksm"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_d17kn"]
+[ext_resource type="Texture2D" uid="uid://c45srkvg4ddlf" path="res://Art/player.png" id="2_o5b2f"]
+[ext_resource type="PackedScene" uid="uid://bxh0gw4k2eyim" path="res://Objects/laser.tscn" id="3_vj83c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xc64m"]
+radius = 16.0312
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+motion_mode = 1
+script = ExtResource("1_d17kn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_o5b2f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xc64m")
+
+[node name="Laser" parent="." instance=ExtResource("3_vj83c")]

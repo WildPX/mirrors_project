@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6ehswacv3trl"]
+
+[ext_resource type="Script" path="res://Scripts/Interactable.gd" id="1_p1x30"]
+[ext_resource type="Texture2D" uid="uid://c2unmt83rg5ib" path="res://Art/spikes2.png" id="1_s86ob"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qrd37"]
+size = Vector2(32, 8)
+
+[node name="MirrorHor" type="Area2D" groups=["Mirrors"]]
+script = ExtResource("1_p1x30")
+type = "MirrorHor"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_s86ob")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qrd37")

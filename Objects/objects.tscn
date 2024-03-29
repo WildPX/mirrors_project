@@ -1,0 +1,139 @@
+[gd_scene load_steps=11 format=3 uid="uid://kby5qukqcosh"]
+
+[ext_resource type="FontFile" uid="uid://cx06axs6o6udb" path="res://Fonts/Inter-VariableFont_slnt,wght.ttf" id="1_7w5k4"]
+[ext_resource type="Texture2D" uid="uid://c2unmt83rg5ib" path="res://Art/spikes2.png" id="1_dy3lx"]
+[ext_resource type="Script" path="res://Scripts/Objects.gd" id="1_idtyr"]
+[ext_resource type="Texture2D" uid="uid://eybk3uojhta8" path="res://Art/mirror1.png" id="3_boe74"]
+[ext_resource type="Texture2D" uid="uid://clytie8osi2xt" path="res://Art/spikes3.png" id="4_4f56v"]
+[ext_resource type="Texture2D" uid="uid://i0cdf0gcdafr" path="res://Art/mirror2.png" id="4_ckrsi"]
+[ext_resource type="Texture2D" uid="uid://bj1kuf5wjh2vx" path="res://Art/mirror3.png" id="5_7f4ig"]
+[ext_resource type="Texture2D" uid="uid://b2hnepof4k12b" path="res://Art/target1.png" id="7_rsexx"]
+[ext_resource type="Script" path="res://Scripts/FileMessage.gd" id="9_2mevg"]
+
+[sub_resource type="Theme" id="Theme_5oflf"]
+default_font = ExtResource("1_7w5k4")
+Label/fonts/font = ExtResource("1_7w5k4")
+
+[node name="Objects" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = SubResource("Theme_5oflf")
+script = ExtResource("1_idtyr")
+object_paths = Array[String](["res://Objects/Mirrors/miror_hor.tscn", "res://Objects/Mirrors/mirror_lb.tscn", "res://Objects/Mirrors/mirror_1.tscn", "res://Objects/Mirrors/mirror_2.tscn", "res://Objects/Mirrors/mirror_3.tscn", "res://Objects/target.tscn"])
+
+[node name="SpawnObjects" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_bottom = 480.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SpawnObjects"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MirrorHor" type="Button" parent="SpawnObjects/VBoxContainer"]
+layout_mode = 2
+text = "Mirror"
+icon = ExtResource("1_dy3lx")
+
+[node name="MirrorLB" type="Button" parent="SpawnObjects/VBoxContainer"]
+layout_mode = 2
+text = "Mirror"
+icon = ExtResource("4_4f56v")
+
+[node name="Mirror1" type="Button" parent="SpawnObjects/VBoxContainer"]
+layout_mode = 2
+text = "Mirror"
+icon = ExtResource("3_boe74")
+
+[node name="Mirror2" type="Button" parent="SpawnObjects/VBoxContainer"]
+layout_mode = 2
+text = "Mirror"
+icon = ExtResource("4_ckrsi")
+
+[node name="Mirror3" type="Button" parent="SpawnObjects/VBoxContainer"]
+layout_mode = 2
+text = "Mirror"
+icon = ExtResource("5_7f4ig")
+
+[node name="Target" type="Button" parent="SpawnObjects/VBoxContainer"]
+layout_mode = 2
+text = "Target"
+icon = ExtResource("7_rsexx")
+
+[node name="Import" type="Button" parent="SpawnObjects/VBoxContainer"]
+layout_mode = 2
+text = "Import"
+
+[node name="Export" type="Button" parent="SpawnObjects/VBoxContainer"]
+layout_mode = 2
+text = "Export"
+
+[node name="Label" type="Label" parent="SpawnObjects/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "WASD: Move
+LMB: Laser
+RMB: Interact
+Alt + Wheel: Rotate
+Shift + Wheel: Resize
+Ctrl + Shift + D: Delete All"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="SaveFile" type="FileDialog" parent="."]
+title = "Save Configuration"
+position = Vector2i(50, 50)
+size = Vector2i(392, 300)
+filters = PackedStringArray("*.txt ; Configuration")
+
+[node name="OpenFile" type="FileDialog" parent="."]
+title = "Open a File"
+position = Vector2i(50, 50)
+size = Vector2i(392, 300)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.txt ; Configuration")
+
+[node name="FileMessage" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 3.0
+offset_right = 3.0
+offset_bottom = 200.0
+grow_horizontal = 2
+scale = Vector2(0.84, 1)
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("9_2mevg")
+
+[connection signal="button_down" from="SpawnObjects/VBoxContainer/MirrorHor" to="." method="_on_mirror_hor_button_down"]
+[connection signal="button_down" from="SpawnObjects/VBoxContainer/MirrorLB" to="." method="_on_mirror_lb_button_down"]
+[connection signal="button_down" from="SpawnObjects/VBoxContainer/Mirror1" to="." method="_on_mirror_1_button_down"]
+[connection signal="button_down" from="SpawnObjects/VBoxContainer/Mirror2" to="." method="_on_mirror_2_button_down"]
+[connection signal="button_down" from="SpawnObjects/VBoxContainer/Mirror3" to="." method="_on_mirror_3_button_down"]
+[connection signal="button_down" from="SpawnObjects/VBoxContainer/Target" to="." method="_on_target_button_down"]
+[connection signal="button_down" from="SpawnObjects/VBoxContainer/Import" to="." method="_on_import_button_down"]
+[connection signal="button_down" from="SpawnObjects/VBoxContainer/Export" to="." method="_on_export_button_down"]
+[connection signal="canceled" from="SaveFile" to="." method="_on_save_file_canceled"]
+[connection signal="confirmed" from="SaveFile" to="." method="_on_save_file_confirmed"]
+[connection signal="file_selected" from="SaveFile" to="." method="_on_save_file_file_selected"]
+[connection signal="canceled" from="OpenFile" to="." method="_on_open_file_canceled"]
+[connection signal="confirmed" from="OpenFile" to="." method="_on_open_file_confirmed"]
+[connection signal="file_selected" from="OpenFile" to="." method="_on_open_file_file_selected"]

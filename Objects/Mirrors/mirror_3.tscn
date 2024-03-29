@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://beofmw3gn1wy2"]
+
+[ext_resource type="Script" path="res://Scripts/Interactable.gd" id="1_3d6wl"]
+[ext_resource type="Texture2D" uid="uid://bj1kuf5wjh2vx" path="res://Art/mirror3.png" id="1_wlmk3"]
+
+[node name="Mirror3" type="Area2D" groups=["Mirrors"]]
+script = ExtResource("1_3d6wl")
+type = "Mirror3"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wlmk3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -5.51471)
+scale = Vector2(0.3125, 1.17647)
+polygon = PackedVector2Array(-25.6, -8.9125, -25.6, 18.2875, -16, 18.2875, -6.4, 17.4375, 9.6, 14.8875, 19.2, 11.4875, 25.6, 4.6875, 19.2, -2.1125, 9.6, -5.5125, -6.4, -8.0625, -16, -8.9125)
