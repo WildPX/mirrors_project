@@ -87,15 +87,16 @@ text = "Export"
 [node name="Label" type="Label" parent="SpawnObjects/VBoxContainer"]
 custom_minimum_size = Vector2(96, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_font_sizes/font_size = 9
 text = "WASD: Move
 LMB: Laser
 RMB / Z: Interact
 Wheel / HJ: Scroll
 Alt / Optn: Rotate
-Shift / Ctrl: Resize
+Ctrl: Resize
 F: Skew
-Ctrl + Shift + D: Delete All"
+Ctrl + Shift + D: Delete All
+Del + Interact: Del obj"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
