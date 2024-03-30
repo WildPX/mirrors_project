@@ -5,6 +5,7 @@ extends Area2D
 @export var type: String
 @onready var default_scale := scale
 @onready var default_rotation := global_rotation
+@onready var default_skew := skew
 
 var mouse_in_area := false
 
@@ -25,6 +26,8 @@ func _process(delta):
 			_rotate_object()
 		if Input.is_action_pressed("size_modifier"):
 			_resize_object()
+		if Input.is_action_pressed("skew_modifier"):
+			_skew_object()
 		if Input.is_action_just_pressed("reset_interactable"):
 			_reset_object()
 		if Input.is_action_just_pressed("delete_interactable"):
@@ -49,6 +52,7 @@ func _rotate_object():
 func _reset_object():
 	scale = default_scale
 	global_rotation = default_rotation
+	skew = default_skew
 	Global.is_already_dragging = false
 	mouse_in_area = false
 
@@ -60,6 +64,13 @@ func _resize_object():
 	elif Input.is_action_just_pressed("rotate_down"):
 		scale.x -= scroll_speed
 		scale.y -= scroll_speed
+
+
+func _skew_object():
+	if Input.is_action_just_pressed("rotate_up"):
+		skew += scroll_speed
+	elif Input.is_action_just_pressed("rotate_down"):
+		skew -= scroll_speed
 
 
 func _destroy_object():

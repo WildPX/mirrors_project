@@ -19,9 +19,9 @@ func _save_current_configuration():
 	var save := ""
 	for child in get_tree().get_root().get_children():
 		if child is Interactable:
-			save += "%s (%s,%s) %s (%s,%s)\n" % [child.type, \
+			save += "%s (%s,%s) %s (%s,%s) %s\n" % [child.type, \
 				child.global_position.x, child.global_position.y, \
-				child.global_rotation, child.scale.x, child.scale.y]
+				child.global_rotation, child.scale.x, child.scale.y, child.skew]
 	
 	return save
 
@@ -48,12 +48,13 @@ func _parse_configuration(data: String):
 		
 		var parts = line.split(" ")
 		# Wrong format check
-		if parts.size() != 4:
+		if parts.size() != 5:
 			print("Error reading line: %s" % line)
 			return null
 		
 		parsed_data.append({"name": parts[0], "coordinates": _str2vec2(parts[1]), \
-			"rotation": float(parts[2]), "scale": _str2vec2(parts[3])})
+			"rotation": float(parts[2]), "scale": _str2vec2(parts[3]), \
+			"skew": float(parts[4])})
 	
 	return parsed_data
 
